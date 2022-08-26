@@ -24,12 +24,12 @@ public class Desktop_Login {
         //Conexion con fines ilustrativos (Falta agregar consultas
         //para registro de datos
         */
-        Registro_Universidad registro = new Registro_Universidad();
+        //Registro_Universidad registro = new Registro_Universidad();
         
         Estudiante estudiantePrueba = new Estudiante("1234","1234", "Juan", "1234", "juan@miumg.com", "1234");
         
         
-        Login loginScreen = new Login(registro);
+        Login loginScreen = new Login();
         loginScreen.setVisible(true);
     }
 }

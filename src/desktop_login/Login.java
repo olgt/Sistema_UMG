@@ -6,7 +6,6 @@
 package desktop_login;
 
 import formularios.Formulario_Admin_Estudiantes;
-import clases_de_sistema.Registro_Universidad;
 import formularios.Panel_Principal_Admin;
 import java.lang.System.*;
 import java.lang.System.Logger.Level;
@@ -19,13 +18,11 @@ import java.sql.*;
  */
 public class Login extends javax.swing.JFrame {
 
-    Registro_Universidad registro;
     /**
      * Creates new form Login
      */
-    public Login(Registro_Universidad registro) {
+    public Login() {
         initComponents();
-        this.registro = registro;
         this.setLocationRelativeTo(null);
         this.setTitle("Login");
     }
@@ -34,20 +31,19 @@ public class Login extends javax.swing.JFrame {
         String usuario = txtUser.getText();
         String pass = String.valueOf(txtPassword.getPassword());
         
-        boolean success = registro.devolverStatusIngreso(usuario, pass);
         
-        if (success){
+        //if (success){
             JOptionPane.showMessageDialog(null, "Bienvenido a nuestro sistema");
-            Login formulario = new Login(registro);
+            Login formulario = new Login();
             formulario.setVisible(true);
             this.dispose();
-        }
-        else 
+        //}
+        /*else 
         {
             JOptionPane.showMessageDialog(null, "No tiene acceso, ingrese de nuevo");
             txtUser.setText("");
             txtPassword.setText("");
-        }
+        }*/
     }
     
 

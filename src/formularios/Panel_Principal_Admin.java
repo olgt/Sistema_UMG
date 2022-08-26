@@ -77,6 +77,11 @@ public class Panel_Principal_Admin extends javax.swing.JFrame {
         jButton8.setText("Opciones Horario");
 
         jButton9.setText("Opciones Asignacion");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Salir");
 
@@ -180,7 +185,15 @@ public class Panel_Principal_Admin extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        Formulario_Admin_Cursos formularioCursos = new Formulario_Admin_Cursos();
+        formularioCursos.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        Formulario_Admin_Asignaciones formularioAsignacion = new Formulario_Admin_Asignaciones();
+        formularioAsignacion.setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
