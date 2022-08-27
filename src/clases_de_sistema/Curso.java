@@ -11,7 +11,7 @@ package clases_de_sistema;
  */
 public class Curso {
     private String nombre;
-    private String temas[];
+    private String temas;
     private String descripcion;
     
     public Curso(String nombre, String descripcion, String temas){
@@ -23,8 +23,12 @@ public class Curso {
         return nombre;
     }
 
-    public String[] getTemas() {
+    public String getTemas() {
         return temas;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
     }
 /*
     public Horario getHorario() {
@@ -40,8 +44,12 @@ public class Curso {
         this.nombre = nombre;
     }
 
-    public void setTemas(String[] temas) {
+    public void setTemas(String temas) {
         this.temas = temas;
+    }
+    
+        public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 /*
     public void setHorario(Horario horario) {
@@ -55,5 +63,6 @@ public class Curso {
     public void eliminar(){
         this.nombre = null;
         this.temas = null;
+        this.descripcion = null;
     }
 }
