@@ -7,8 +7,11 @@ package formularios;
 
 import clases_de_sistema.Estudiante;
 import clases_de_sistema.cls_estudiantesBO;
+import desktop_login.Conexion;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +19,46 @@ import java.sql.*;
  */
 public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
 
+    static Conexion con;
     /**
      * Creates new form Sistema
      */
-    public Formulario_Admin_Estudiantes() {
+    public Formulario_Admin_Estudiantes(Conexion con) {
         initComponents();
+        this.con=con;
+        llenarTabla(con, tblEstudiantes);
+    }
+    
+    public void llenarTabla(Conexion c, JTable tabla){
+        DefaultTableModel model;
+        String[] columnas={"Nombre", "Celular", "Carnet", "Correo"};
+        model = new DefaultTableModel(null, columnas);
+        String sql = "SELECT * FROM ESTUDIANTE";
+        String [] filas = new String[4];
+        Statement st = null;
+        ResultSet rs = null;
+        
+        try {
+            st = c.getExistingConnection().createStatement();
+            rs = st.executeQuery(sql);
+            
+            int numeroRegistroActual = 0;
+            
+            while(rs.next()){
+                numeroRegistroActual=+1;
+                for(int columnaActual = 0; columnaActual<4; columnaActual++){
+                    filas[columnaActual] = rs.getString(columnaActual+1);
+                    String dato = rs.getString(columnaActual+1);
+                    System.out.println("Datos Extraidos: " + dato);
+                }
+                model.addRow(filas);
+            }
+            tabla.setModel(model);
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No se pudo llenar tabla");
+        }
+                
     }
 
     /**
@@ -45,7 +83,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -112,10 +150,10 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
             }
         });
 
-        btnLimpiar.setText("Limpiar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        btnRefrescar.setText("Refrescar");
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
+                btnRefrescarActionPerformed(evt);
             }
         });
 
@@ -165,7 +203,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -209,7 +247,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpiar)
+                        .addComponent(btnRefrescar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalir)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -255,9 +293,10 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarActionPerformed
+        llenarTabla(con, tblEstudiantes);
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -298,11 +337,11 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formulario_Admin_Estudiantes().setVisible(true);
+                new Formulario_Admin_Estudiantes(con).setVisible(true);
             }
         });
     }
@@ -310,8 +349,8 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

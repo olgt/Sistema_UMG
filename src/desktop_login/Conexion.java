@@ -20,6 +20,9 @@ public class Conexion {
     private static  String clave = "123456";
     private static String url= "jdbc:oracle:thin:@localhost:1521:xe";
     
+    public Connection getExistingConnection(){
+        return this.conn;
+    }
     
     public Connection getConnection(String p_login, String p_clave) throws SQLException{
         try{
