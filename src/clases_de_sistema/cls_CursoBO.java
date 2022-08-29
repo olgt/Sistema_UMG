@@ -16,15 +16,14 @@ public class cls_CursoBO {
     
     private String mensaje;
     
-    public String agregarEstudiante(Curso curso) throws SQLException{
+    public String agregarCurso(Curso curso, Conexion con) throws SQLException{
         
-        Conexion con = new Conexion();
         cls_CursoDAO cursoDAO = new cls_CursoDAO();
         
         try{
-            mensaje = cursoDAO.agregarCurso(con.getConnection("UMG","123456"), curso);
+            mensaje = cursoDAO.agregarCurso(con.getExistingConnection(), curso);
             System.out.println("Paso 5" + mensaje);
-        } catch (SQLException e){
+        } catch (Exception e){
             mensaje = mensaje + " " + e.getMessage();
             System.out.println("Paso 6" + mensaje);
         }        
@@ -33,17 +32,32 @@ public class cls_CursoBO {
     }
     
     
-    public String modificarEstudiante(Curso curso){
+    public String modificarCurso(java.sql.Connection con, Curso curso){
+        cls_CursoDAO cursoDAO = new cls_CursoDAO();
+        
+        try{
+            mensaje = cursoDAO.modificarCurso(con, curso);
+            System.out.println("Paso 5" + mensaje);
+        } catch (Exception e){
+            mensaje = mensaje + " " + e.getMessage();
+            System.out.println("Paso 6" + mensaje);
+        }        
+        
         return mensaje;
     }
     
     
-    public String eliminarEstudiante(int id){
-       return mensaje;
-    }
-    
-    
-    public void mostrarEstudiante(){
+    public String eliminarCurso(java.sql.Connection con, String nombreCurso){
+        cls_CursoDAO cursoDAO = new cls_CursoDAO();
         
+        try{
+            mensaje = cursoDAO.eliminarCurso(con, nombreCurso);
+            System.out.println("Paso 5" + mensaje);
+        } catch (Exception e){
+            mensaje = mensaje + " " + e.getMessage();
+            System.out.println("Paso 6" + mensaje);
+        }        
+        
+        return mensaje;
     }
 }
