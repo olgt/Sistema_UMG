@@ -40,12 +40,62 @@ public class cls_estudiantesDAO {
     }
     
     
-    public String modficiarEstudiante(){
+    public String modificarEstudiante(Connection con, Estudiante est){
+        
+        PreparedStatement pst = null;
+        String sql = "UPDATE ESTUDIANTE SET "
+                + "NOMBRE = (?),"
+                + "CELULAR = (?),"
+                + "AÑO_INGRESO = (?),"
+                + "CORREO = (?),"
+                + "PASSWORD = (?) "
+                + "WHERE CARNET = (?)";
+        
+        try{
+            pst = con.prepareStatement(sql);
+            pst.setString(1, est.getNombre());
+            pst.setString(2, est.getNo_celular());
+            pst.setString(3, est.getAnio_ingreso());
+            pst.setString(4, est.getCorreo_electronico());
+            pst.setString(5, est.getPassword());
+            pst.setString(6, est.getCarnet());
+
+
+            
+            mensaje = "Modficiacion realizada con exito";
+            int i = pst.executeUpdate();
+            con.commit();
+            pst.close();
+            System.out.println("Items Modified: " + i);
+            
+        } catch(SQLException e){
+            mensaje = "Error" + e.getMessage();
+        }
+        
         return mensaje;
     }
     
     
-    public String eliminarEstudiante(){
+    public String eliminarEstudiante(Connection con, String carnet){
+        
+        PreparedStatement pst = null;
+        String sql = "DELETE FROM ESTUDIANTE WHERE CARNET = (?)";
+        
+        try{
+            pst = con.prepareStatement(sql);
+            pst.setString(1, carnet);
+
+            
+            mensaje = "Eliminacion realizada con exito";
+            int i = pst.executeUpdate();
+            con.commit();
+            pst.close();
+            System.out.println("Items Deleted: " + i);
+            
+        } catch(SQLException e){
+            mensaje = "Error" + e.getMessage();
+        }
+        
        return mensaje;
     }
     

@@ -31,10 +31,10 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
     
     public void llenarTabla(Conexion c, JTable tabla){
         DefaultTableModel model;
-        String[] columnas={"Nombre", "Celular", "Carnet", "Correo"};
+        String[] columnas={"Nombre", "Celular", "Carnet", "Año Ingreso", "Correo"};
         model = new DefaultTableModel(null, columnas);
         String sql = "SELECT * FROM ESTUDIANTE";
-        String [] filas = new String[4];
+        String [] filas = new String[5];
         Statement st = null;
         ResultSet rs = null;
         
@@ -46,7 +46,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
             
             while(rs.next()){
                 numeroRegistroActual=+1;
-                for(int columnaActual = 0; columnaActual<4; columnaActual++){
+                for(int columnaActual = 0; columnaActual<5; columnaActual++){
                     filas[columnaActual] = rs.getString(columnaActual+1);
                     String dato = rs.getString(columnaActual+1);
                     System.out.println("Datos Extraidos: " + dato);
@@ -91,6 +91,8 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,13 +120,13 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
 
         tblEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Celular", "Carnet", "Correo"
+                "Nombre", "Celular", "Carnet", "Correo", "Año Ingreso"
             }
         ));
         jScrollPane1.setViewportView(tblEstudiantes);
@@ -170,6 +172,12 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
 
         jLabel7.setText("Password");
 
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("- Para eliminar y modficar el \nestudiante por  favor ingrese su\n numero de carnet");
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -190,7 +198,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
                                 .addGap(3, 3, 3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
@@ -199,7 +207,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,7 +215,10 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -216,6 +227,7 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -250,8 +262,9 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
                         .addComponent(btnRefrescar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalir)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -286,11 +299,37 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+                
+        cls_estudiantesBO objBO = new cls_estudiantesBO();
+        
+        Estudiante estudiante = new Estudiante(
+                txtCarnet.getText(),
+                txtAnio.getText(), 
+                txtNombre.getText(),
+                txtCelular.getText(),
+                txtCorreo.getText(),
+                txtPassword.getText());
+        try{
+            objBO.modificarEstudiante(con.getExistingConnection(), estudiante);
+            JOptionPane.showMessageDialog(null, "Estudiante agregado: " + estudiante.toString());
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+            System.out.println("Paso 1" + ex.getMessage());
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        
+        cls_estudiantesBO objBO = new cls_estudiantesBO();
+        
+        try{
+            objBO.eliminarEstudiante(con.getExistingConnection(), txtCarnet.getText());
+            JOptionPane.showMessageDialog(null, "Estudiante eliminado (carnet): " + txtCarnet.getText());
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
+            System.out.println("Paso 1" + ex.getMessage());
+        }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
@@ -361,6 +400,8 @@ public class Formulario_Admin_Estudiantes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tblEstudiantes;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtCarnet;

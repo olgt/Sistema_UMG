@@ -6,7 +6,6 @@
 package clases_de_sistema;
 
 
-import com.sun.jdi.connect.spi.Connection;
 import desktop_login.Conexion;
 import java.sql.*;
 
@@ -33,13 +32,33 @@ public class cls_estudiantesBO {
     }
     
     
-    public String modificarEstudiante(Estudiante est){
+    public String modificarEstudiante(Connection con, Estudiante est){
+        cls_estudiantesDAO estDAO = new cls_estudiantesDAO();
+        
+        try{
+            mensaje = estDAO.modificarEstudiante(con, est);
+            System.out.println("Paso 5" + mensaje);
+        } catch (Exception e){
+            mensaje = mensaje + " " + e.getMessage();
+            System.out.println("Paso 6" + mensaje);
+        }        
+        
         return mensaje;
     }
     
     
-    public String eliminarEstudiante(int id){
-       return mensaje;
+    public String eliminarEstudiante(Connection con, String carnet){
+        cls_estudiantesDAO estDAO = new cls_estudiantesDAO();
+        
+        try{
+            mensaje = estDAO.eliminarEstudiante(con, carnet);
+            System.out.println("Paso 5" + mensaje);
+        } catch (Exception e){
+            mensaje = mensaje + " " + e.getMessage();
+            System.out.println("Paso 6" + mensaje);
+        }        
+        
+        return mensaje;
     }
     
     
