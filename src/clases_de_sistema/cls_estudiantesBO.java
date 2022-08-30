@@ -21,9 +21,9 @@ public class cls_estudiantesBO {
         cls_estudiantesDAO Est = new cls_estudiantesDAO();
         
         try{
-            mensaje = Est.agregarEstudiante(con.getConnection("UMG","123456"), est);
+            mensaje = Est.agregarEstudiante(con.getExistingConnection(), est);
             System.out.println("Paso 5" + mensaje);
-        } catch (SQLException e){
+        } catch (Exception e){
             mensaje = mensaje + " " + e.getMessage();
             System.out.println("Paso 6" + mensaje);
         }        

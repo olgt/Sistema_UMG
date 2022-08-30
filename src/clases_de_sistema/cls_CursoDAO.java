@@ -15,7 +15,7 @@ public class cls_CursoDAO {
     public String agregarCurso(Connection Con, Curso curso){
         
         PreparedStatement pst = null;
-        String sql = "INSERT INTO CURSO (Nombre, Descripcion, ID_Horario, ID_Seccion) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO CURSO (Nombre, Descripcion, , ID_Seccion) VALUES(?,?,?,?)";
         try{
             pst = Con.prepareStatement(sql);
             pst.setString(1, curso.getNombre());
