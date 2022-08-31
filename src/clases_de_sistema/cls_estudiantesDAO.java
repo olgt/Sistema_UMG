@@ -15,14 +15,14 @@ public class cls_estudiantesDAO {
     public String agregarEstudiante(Connection Con, Estudiante est){
         
         PreparedStatement pst = null;
-        String sql = "INSERT INTO ESTUDIANTE (Nombre, Celular, Carnet, Año_Ingreso, Correo, Password) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO ESTUDIANTE (nombre, telefono, correo, carnet, ano_ingreso, password, carrera_id_carrera) VALUES(?,?,?,?,?,?, 1)";
         try{
             pst = Con.prepareStatement(sql);
             pst.setString(1, est.getNombre());
             pst.setString(2, est.getNo_celular());
-            pst.setString(3, est.getCarnet());
-            pst.setString(4, est.getAnio_ingreso());
-            pst.setString(5, est.getCorreo_electronico());
+            pst.setString(3, est.getCorreo_electronico());
+            pst.setString(4, est.getCarnet());
+            pst.setString(5, est.getAnio_ingreso());
             pst.setString(6, est.getPassword());
             
             mensaje = "Insercion realizada con exito";
@@ -45,8 +45,8 @@ public class cls_estudiantesDAO {
         PreparedStatement pst = null;
         String sql = "UPDATE ESTUDIANTE SET "
                 + "NOMBRE = (?),"
-                + "CELULAR = (?),"
-                + "AÑO_INGRESO = (?),"
+                + "TELEFONO = (?),"
+                + "ANO_INGRESO = (?),"
                 + "CORREO = (?),"
                 + "PASSWORD = (?) "
                 + "WHERE CARNET = (?)";

@@ -14,8 +14,8 @@ public class Estudiante extends Persona{
     private String anio_ingreso;
     private String password;
     
-    public Estudiante(String carnet, String anio_ingreso, String nombre, 
-            String no_celular, String correo, String password){
+    public Estudiante(String nombre, String telefono, String correo, 
+            String carnet, String anio_ingreso, String password){
         this.anio_ingreso = anio_ingreso;
         this.carnet = carnet;
         this.nombre = nombre;
