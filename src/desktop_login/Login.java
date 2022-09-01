@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        ConexionDBButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,10 +87,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Conexion DB");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ConexionDBButton.setText("Conexion DB");
+        ConexionDBButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ConexionDBButtonActionPerformed(evt);
             }
         });
 
@@ -116,7 +116,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(51, 51, 51)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(ConexionDBButton)))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,7 +135,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(ConexionDBButton))
                 .addGap(48, 48, 48))
         );
 
@@ -167,25 +167,31 @@ public class Login extends javax.swing.JFrame {
         sistema();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ConexionDBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexionDBButtonActionPerformed
         // TODO add your handling code here:
         
-        Conexion c = new Conexion();
+        
         try{
             String usuario = txtUser.getText();
             String pass = String.valueOf(txtPassword.getPassword());
-            c.getConnection(usuario, pass);
+            linkDB.getConnection(usuario, pass);
             
-            JOptionPane.showMessageDialog(null, "Bienvenido a nuestro sistema");
-            Panel_Principal_Admin panelAdmin = new Panel_Principal_Admin();
+            if(linkDB.currentConnection != null){
+                JOptionPane.showMessageDialog(null, "Bienvenido a nuestro sistema");
+                Panel_Principal_Admin panelAdmin = new Panel_Principal_Admin();
             
-            panelAdmin.setVisible(true);
-            this.dispose();
+                panelAdmin.setVisible(true);
+                this.dispose();
+            } else {
+                txtUser.setText("");
+                txtPassword.setText("");
+                JOptionPane.showMessageDialog(null, "Usuario/Contraseña Incorrecta");
+            }
             
         } catch (SQLException ex){
            
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ConexionDBButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,8 +229,8 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ConexionDBButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

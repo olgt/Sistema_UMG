@@ -13,20 +13,20 @@ import javax.swing.JOptionPane;
  *
  * @author olgt1
  */
-public class Conexion {
+public class linkDB {
  
-    private static Connection conn = null;
-    private static String login = "UMG";
-    private static  String clave = "123456";
+    public static Connection currentConnection = null;
+    public static String login = "UMG";
+    public static  String clave = "123456";
     private static String url= "jdbc:oracle:thin:@localhost:1521:xe";
+
     
-    
-    public Connection getConnection(String p_login, String p_clave) throws SQLException{
+    public static Connection getConnection(String p_login, String p_clave) throws SQLException{
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn= DriverManager.getConnection(url, p_login, p_clave);
-            conn.setAutoCommit(false);
-            if(conn != null){
+            currentConnection= DriverManager.getConnection(url, p_login, p_clave);
+            currentConnection.setAutoCommit(false);
+            if(currentConnection != null){
                 JOptionPane.showMessageDialog (null, "Conexion exitosa");
             } else {
                 JOptionPane.showMessageDialog(null, "Error de Conexion");
@@ -36,12 +36,12 @@ public class Conexion {
             
             JOptionPane.showMessageDialog(null, "Error de conexion " + e.getMessage());
         }
-        return conn;
+        return currentConnection;
     }
     
-        public void desconexion(){
+        public static void desconexion(){
         try{
-            conn.close();
+            currentConnection.close();
         } catch(SQLException e){
             JOptionPane.showMessageDialog (null, "error al desconectra" + e.getMessage());
         }
