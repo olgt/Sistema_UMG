@@ -4,7 +4,7 @@
  */
 package clases_de_sistema;
 import com.sun.jdi.connect.spi.Connection;
-import desktop_login.Conexion;
+import desktop_login.linkDB;
 import java.sql.*;
 /**
  *
@@ -15,7 +15,7 @@ public class cls_jornadaBO {
     
     public String agregarJornada(Jornada jor) throws SQLException{
         
-        Conexion con = new Conexion();
+        linkDB con = new linkDB();
         cls_jornadaDAO jor = new cls_jornadaDAO();
         
         try{

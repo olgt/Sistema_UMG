@@ -170,17 +170,23 @@ public class Login extends javax.swing.JFrame {
     private void ConexionDBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexionDBButtonActionPerformed
         // TODO add your handling code here:
         
-        Conexion c = new Conexion();
+        
         try{
             String usuario = txtUser.getText();
             String pass = String.valueOf(txtPassword.getPassword());
-            c.getConnection(usuario, pass);
+            linkDB.getConnection(usuario, pass);
             
-            JOptionPane.showMessageDialog(null, "Bienvenido a nuestro sistema");
-            Panel_Principal_Admin panelAdmin = new Panel_Principal_Admin(c);
+            if(linkDB.currentConnection != null){
+                JOptionPane.showMessageDialog(null, "Bienvenido a nuestro sistema");
+                Panel_Principal_Admin panelAdmin = new Panel_Principal_Admin();
             
-            panelAdmin.setVisible(true);
-            this.dispose();
+                panelAdmin.setVisible(true);
+                this.dispose();
+            } else {
+                txtUser.setText("");
+                txtPassword.setText("");
+                JOptionPane.showMessageDialog(null, "Usuario/Contraseña Incorrecta");
+            }
             
         } catch (SQLException ex){
            

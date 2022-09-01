@@ -5,7 +5,7 @@
  */
 package formularios;
 
-import desktop_login.Conexion;
+import desktop_login.linkDB;
 
 /**
  *
@@ -13,13 +13,12 @@ import desktop_login.Conexion;
  */
 public class Panel_Principal_Admin extends javax.swing.JFrame {
 
-    static Conexion con;
+    static linkDB con;
     /**
      * Creates new form Panel_Principal_Admin
      */
-    public Panel_Principal_Admin(Conexion con) {
+    public Panel_Principal_Admin() {
         initComponents();
-        this.con = con;
     }
 
     /**
@@ -184,7 +183,7 @@ public class Panel_Principal_Admin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Formulario_Admin_Estudiantes formularioEstudiante = new Formulario_Admin_Estudiantes(con);
+        Formulario_Admin_Estudiantes formularioEstudiante = new Formulario_Admin_Estudiantes();
         formularioEstudiante.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -209,6 +208,7 @@ public class Panel_Principal_Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        linkDB.desconexion();
         this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -242,7 +242,7 @@ public class Panel_Principal_Admin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Panel_Principal_Admin(con).setVisible(true);
+                new Panel_Principal_Admin().setVisible(true);
             }
         });
     }

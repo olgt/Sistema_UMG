@@ -5,7 +5,7 @@
 package clases_de_sistema;
 
 import com.sun.jdi.connect.spi.Connection;
-import desktop_login.Conexion;
+import desktop_login.linkDB;
 import java.sql.*;
 /**
  *
@@ -17,7 +17,7 @@ public class cls_representante_legalBO {
     
     public String agregarRepresentanteLegal(Representante_legal rep) throws SQLException{
         
-        Conexion con = new Conexion();
+        linkDB con = new linkDB();
         cls_representante_legalDAO rep = new cls_representante_legalDAO();
         
         try{
